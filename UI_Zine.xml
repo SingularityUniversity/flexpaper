@@ -4,7 +4,7 @@
         <toolbar height="40" width="100%" paddingTop="9" paddingLeft="15" paddingRight="15" paddingBottom="8" backgroundColor="#555555" borderColor="#555555" borderStyle="solid" borderThickness="1" cornerRadius="3" horizontalAlign="center" location="top" visible="true">
             <element type="button" id="bttnPrint" icon_width="15" icon_height="15" visible="true"/>
             <element type="button" id="bttnOutline" icon_width="13" icon_height="13" paddingTop="1" visible="false"/>
-            <element type="button" id="bttnDownload" icon_width="15" icon_height="15" visible="false"/>
+            <element type="button" id="bttnDownload" icon_width="15" icon_height="15" visible="true"/>
             <element type="button" id="bttnSocialShare" height="21" icon_width="15" icon_height="15" visible="true" paddingTop="0"/>
             <element type="button" id="bttnBookView" height="19" icon_width="21" icon_height="13" paddingLeft="15" visible="true"/>
             <element type="button" id="bttnSinglePage" height="19" paddingLeft="0" icon_width="13" icon_height="13" paddingRight="15" visible="true"/>
@@ -57,4 +57,4 @@
             <element type="button" id="bttnFind" icon_width="30" icon_height="30" visible="false"/>
         </toolbar>
     </mobile>
-<outline/><labels/></FlexPaper_Zine_UIConfiguration>
+<outline/><labels><node pageNumber="1" title="i"/><node pageNumber="2" title="ii"/><node pageNumber="3" title="1"/><node pageNumber="4" title="2"/><node pageNumber="5" title="3"/><node pageNumber="6" title="4"/><node pageNumber="7" title="5"/><node pageNumber="8" title="6"/><node pageNumber="9" title="7"/><node pageNumber="10" title="8"/><node pageNumber="11" title="9"/><node pageNumber="12" title="10"/><node pageNumber="13" title="11"/><node pageNumber="14" title="12"/><node pageNumber="15" title="13"/><node pageNumber="16" title="14"/><node pageNumber="17" title="15"/><node pageNumber="18" title="16"/><node pageNumber="19" title="17"/><node pageNumber="20" title="18"/><node pageNumber="21" title="19"/><node pageNumber="22" title="20"/><node pageNumber="23" title="21"/><node pageNumber="24" title="22"/><node pageNumber="25" title="23"/><node pageNumber="26" title="24"/><node pageNumber="27" title="25"/><node pageNumber="28" title="26"/><node pageNumber="29" title="27"/><node pageNumber="30" title="28"/><node pageNumber="31" title="29"/><node pageNumber="32" title="30"/></labels></FlexPaper_Zine_UIConfiguration>
