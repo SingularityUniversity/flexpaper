@@ -11,29 +11,29 @@
         body { margin:0; padding:0; overflow:auto; }
         #flashContent { display:none; }
     </style>
-    <link rel="stylesheet" type="text/css" href="css/flexpaper.css?1464113023329" />
-    <link rel="stylesheet" type="text/css" href="css/popover.css?1464113023329" />
-    <link rel="stylesheet" type="text/css" href="css/popover-theme.css?1464113023329" />
-    <script type="text/javascript" src="js/jquery.min.js?1464113023329"></script>
-    <script type="text/javascript" src="js/jquery.extensions.min.js?1464113023329"></script>
-    <script type="text/javascript" src="js/popover.min.js?1464113023329"></script>
+    <link rel="stylesheet" type="text/css" href="css/flowpaper.css" />
+    <link rel="stylesheet" type="text/css" href="css/popover.css" />
+    <link rel="stylesheet" type="text/css" href="css/popover-theme.css" />
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.extensions.min.js"></script>
+    <script type="text/javascript" src="js/popover.min.js"></script>
     <!--[if gte IE 10 | !IE ]><!-->
-    <script type="text/javascript" src="js/three.min.js?1464113023329"></script>
+    <script type="text/javascript" src="js/three.min.js"></script>
     <!--<![endif]-->
-    <script type="text/javascript" src="js/flexpaper.js?1464113023329"></script>
-    <script type="text/javascript" src="js/flexpaper_handlers.js?1464113023329"></script>
+    <script type="text/javascript" src="js/flowpaper.js"></script>
+    <script type="text/javascript" src="js/flowpaper_handlers.js"></script>
     <title>Singularity University for Organizations</title>
 </head>
 <body>
-<div id="documentViewer" class="flexpaper_viewer" style="position:absolute;;width:100%;height:100%;background-color:#222222;;"></div>
+<div id="documentViewer" class="flowpaper_viewer" style="position:absolute;;width:100%;height:100%;background-color:#222222;;"></div>
 <script type="text/javascript">
-    $('#documentViewer').FlexPaperViewer(
+    $('#documentViewer').FlowPaperViewer(
             { config : {
-                PDFFile         : 'docs/Your Guide to The Future - Singularity University_[*,2,true].pdf',
-                IMGFiles        : 'docs/Your Guide to The Future - Singularity University.pdf_{page}.jpg',
+                PDFFile         : 'docs/SU_Corporate-Journey_Update_V7_pages_[*,2,true].pdf',
+                IMGFiles        : 'docs/SU_Corporate-Journey_Update_V7_pages.pdf_{page}.jpg',
                 HighResIMGFiles : '',
-                JSONFile        : 'docs/Your Guide to The Future - Singularity University.pdf_{page}.js',
-                ThumbIMGFiles   : 'docs/Your Guide to The Future - Singularity University.pdf_{page}_thumb.jpg',
+                JSONFile        : 'docs/SU_Corporate-Journey_Update_V7_pages.pdf_{page}.js',
+                ThumbIMGFiles   : 'docs/SU_Corporate-Journey_Update_V7_pages.pdf_{page}_thumb.jpg',
                 SWFFile         : '',
 
                 Scale                   : 0.1,
@@ -45,6 +45,7 @@
                 AutoAdjustPrintSize     : true,
                 PrintPaperAsBitmap      : false,
                 AutoDetectLinks         : true,
+                ImprovedAccessibility   : false,
                 FullScreenAsMaxWindow   : false,
                 ProgressiveLoading      : false,
                 MinZoomSize             : 0.1,
@@ -63,11 +64,12 @@
                 CursorToolsVisible      : true,
                 SearchToolsVisible      : true,
 
-                UIConfig                : 'UI_Zine.xml',
+                UIConfig                : 'SU_Corporate-Journey_Update_V7_pages.xml?reload=1481655150547',
                 WMode                   : 'transparent',
 
-                key                     : '$7ceef1c81bdd8f59d89',
-                TrackingNumber          : 'UA-21884239-1',
+                key                     : '$eeb3a87661295339fee',
+                TrackingNumber          : 'UA-21884239-16',
+                localeDirectory         : 'locale/',
                 localeChain             : 'en_US'
             }}
     );
@@ -77,7 +79,7 @@
         url = document.URL.toString();
     }
     if(url.indexOf("file:")>=0){
-        jQuery('#documentViewer').html("<div style='position:relative;background-color:#ffffff;width:420px;font-family:Verdana;font-size:10pt;left:22%;top:20%;padding: 10px 10px 10px 10px;border-style:solid;border-width:5px;'><img src='data:image/gif;base64,R0lGODlhEAAPAMQPAPS+GvXAIfrjnP/89vnZePrhlvS9F//+/PrfjfS/HfrgkPS+GP/9+YJiACAYAP////O3AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAA8ALAAAAAAQAA8AAAVQ4COOD0GQKElA0JmSg7EsxvCOCMsi9xPrkNpNwXI0WIoXA1A8QgCMVEFn1BVQS6rzGR1NtcCriJEAVnWJrgDI1gkehwD7rAsc1u28QJ5vB0IAOw%3D%3D'>&nbsp;<b>You are trying to use FlexPaper from a local directory.</b><br/><br/> Use the 'View in browser' button in the Desktop Publisher publish & preview dialog window to preview your publication or copy the contents of your publication directory to a web server and access this html file through a http:// url.</div>");
+        jQuery('#documentViewer').html("<div style='position:relative;background-color:#ffffff;width:420px;font-family:Verdana;font-size:10pt;left:22%;top:20%;padding: 10px 10px 10px 10px;border-style:solid;border-width:5px;'><img src='data:image/gif;base64,R0lGODlhEAAPAMQPAPS+GvXAIfrjnP/89vnZePrhlvS9F//+/PrfjfS/HfrgkPS+GP/9+YJiACAYAP////O3AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAA8ALAAAAAAQAA8AAAVQ4COOD0GQKElA0JmSg7EsxvCOCMsi9xPrkNpNwXI0WIoXA1A8QgCMVEFn1BVQS6rzGR1NtcCriJEAVnWJrgDI1gkehwD7rAsc1u28QJ5vB0IAOw%3D%3D'>&nbsp;<b>You are trying to use FlowPaper from a local directory.</b><br/><br/> Use the 'View in browser' button in the Desktop Publisher publish & preview dialog window to preview your publication or copy the contents of your publication directory to a web server and access this html file through a http:// url.</div>");
     }
 </script>
 </body>
