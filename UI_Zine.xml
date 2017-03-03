@@ -9,7 +9,7 @@
             <element type="button" id="bttnBookView" height="19" icon_width="21" icon_height="13" paddingLeft="15" visible="false"/>
             <element type="button" id="bttnSinglePage" height="19" paddingLeft="0" icon_width="13" icon_height="13" paddingRight="15" visible="false"/>
             <element type="slider" id="zoomSlider" height="11" width="80" visible="true"/>
-            <element type="textinput" id="txtZoomFactor" height="19" width="32" visible="false"/>
+            <element type="textinput" id="txtZoomFactor" height="19" width="32" visible="true"/>
             <element type="button" id="bttnFullscreen" height="19" icon_width="14" icon_height="14" visible="true"/>
             <element type="button" id="bttnPrevPage" icon_width="14" icon_height="14" height="20" width="15" visible="true"/>
             <element type="textinput" id="txtPageNumber" height="19" width="25" visible="true"/>

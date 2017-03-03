@@ -11,7 +11,7 @@
 .flowpaper_grabbing {cursor: -moz-grabbing;}
 .flowpaper_hidden {display: none;}
 .flowpaper_noopa {opacity:0; filter: alpha(opacity=0); -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"}
-.flowpaper_printFrame{position:absolute;left:-1000px;top:-1000px;border-width:0px;border-style:none;width:1000px;height:1000px;}
+.flowpaper_printFrame{position:absolute;left:-1000px;top:6000px;border-width:0px;border-style:none;width:1000px;height:1000px;}
 
 /* FlowPaper text layer styles */
 .flowpaper_textLayer {position: absolute;left: 0;top: 0;right: 0;bottom: 0;color: #000;}
@@ -28,10 +28,12 @@
 .flowpaper_selected_searchmatch {  }
 .flowpaper_tmpselected {background-color: #3c78b4; opacity:.3; filter: alpha(opacity=30); -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=30)"}
 .flowpaper_pageword{position:absolute;z-index:10;color:transparent;}
-.flowpaper_selector{position:relative;left:-1000px;top:-10px;border-width:0px;border-style:none;width:0px;height:0px;}
+.flowpaper_selector{position:absolute;left:-1000px;top:-10px;border-width:0px;border-style:none;width:0px;height:0px;}
+.flowpaper_custom_logo{-moz-user-select:none;-webkit-user-select:none;right:0px;bottom:0px;position:absolute;bottom:0px;right:0px;position:absolute;margin-top:0px;margin-right:10px;z-index:99}
 
 /* FlowPaper specific styles for pages */
 .flowpaper_viewer {height: 100%;width: 100%; -moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;user-select: none;}
+.flowpaper_viewer_container > * {-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;user-select: none;}
 .flowpaper_initloader {padding-bottom:21px;position:absolute;left:0px;top:0px;width:100%;height:100%;}
 .flowpaper_initloader_title {font-family: Verdana; font-size: 14px; }
 .flowpaper_initloader_panel {font-family: Verdana; font-size: 10px; padding-top:0px;padding-left:10px;position:relative;top:40%;background-color:#ffffff;width:190px;height:49px;-moz-border-radius-topleft: 10px;border-top-left-radius: 10px;-moz-border-radius-bottomleft: 10px;border-bottom-left-radius: 10px; -moz-border-radius-topright: 10px;border-top-right-radius: 10px; -moz-border-radius-bottomright: 10px;border-bottom-right-radius: 10px;opacity:.9; filter: alpha(opacity=90); -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=90)"}

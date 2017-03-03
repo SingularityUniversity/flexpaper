@@ -35,7 +35,7 @@ window.FlowPaperViewerEmbedding = window.$f = function(id, args) {
     var userAgent = navigator.userAgent.toLowerCase();
     var browser = window["eb.browser"] = {
         version: (userAgent.match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/) || [])[1],
-        safari: /webkit/.test(userAgent),
+        safari: (/webkit/.test(userAgent) || /applewebkit/.test(userAgent)) && !(/chrome/.test(userAgent)),
         opera: /opera/.test(userAgent),
         msie: /msie/.test(userAgent) && !/opera/.test(userAgent),
         mozilla: /mozilla/.test(userAgent) && !/(compatible|webkit)/.test(userAgent),
@@ -136,6 +136,7 @@ window.FlowPaperViewerEmbedding = window.$f = function(id, args) {
         ZoomTransition 			: (config.ZoomTransition!=null)?config.ZoomTransition:'easeOut',
         ZoomTime 				: (config.ZoomTime!=null)?config.ZoomTime:0.5,
         ZoomInterval 			: (config.ZoomInterval)?config.ZoomInterval:0.1,
+        TouchZoomInterval       : (config.TouchZoomInterval)?config.TouchZoomInterval:1.5,
         FitPageOnLoad 			: (config.FitPageOnLoad!=null)?config.FitPageOnLoad:false,
         FitWidthOnLoad 			: (config.FitWidthOnLoad!=null)?config.FitWidthOnLoad:false,
         FullScreenAsMaxWindow 	: (config.FullScreenAsMaxWindow!=null)?config.FullScreenAsMaxWindow:false,
@@ -157,6 +158,7 @@ window.FlowPaperViewerEmbedding = window.$f = function(id, args) {
         ImprovedAccessibility   : config.ImprovedAccessibility,
         BitmapBasedRendering 	: (config.BitmapBasedRendering!=null)?config.BitmapBasedRendering:false,
         StartAtPage 			: (config.StartAtPage!=null&&config.StartAtPage.toString().length>0&&!isNaN(config.StartAtPage))?config.StartAtPage:1,
+        FontsToLoad             : config.FontsToLoad,
         PrintPaperAsBitmap		: (config.PrintPaperAsBitmap!=null)?config.PrintPaperAsBitmap:((browser.safari||browser.mozilla)?true:false),
         PrintFn                 : config.PrintFn,
         AutoAdjustPrintSize		: (config.AutoAdjustPrintSize!=null)?config.AutoAdjustPrintSize:true,
@@ -168,6 +170,8 @@ window.FlowPaperViewerEmbedding = window.$f = function(id, args) {
         UIConfig                : config.UIConfig,  // FlowPaper Zine parameter
         PageIndexAdjustment     : config.PageIndexAdjustment,
         SharingUrl              : config.SharingUrl,
+        BrandingLogo            : config.BrandingLogo,
+        BrandingUrl             : config.BrandingUrl,
 
         ViewModeToolsVisible 	: ((config.ViewModeToolsVisible!=null)?config.ViewModeToolsVisible:true),
         ZoomToolsVisible 		: ((config.ZoomToolsVisible!=null)?config.ZoomToolsVisible:true),
@@ -268,10 +272,10 @@ window.FlowPaperViewerEmbedding = window.$f = function(id, args) {
     FLOWPAPER.animateDenyEffect = function(obj,margin,time,cycles,dir) {
         window.setTimeout(function(){
             var speed = time / ((2*cycles)+1);
-            var margRat = 1 + (60/(cycles*cycles)); $(obj).stop(true,true);
+            var margRat = 1 + (60/(cycles*cycles)); jQuery(obj).stop(true,true);
             for (var i=0; i<=cycles; i++) {
                 for (var j=-1; j<=1; j+=2)
-                    $(obj).animate({marginLeft: (i!=cycles)*j*margin},{duration:speed, queue:true});
+                    jQuery(obj).animate({marginLeft: (i!=cycles)*j*margin},{duration:speed, queue:true});
 
                 margin/=margRat;
             }
@@ -676,7 +680,7 @@ window.FlowPaperViewerEmbedding = window.$f = function(id, args) {
             (browser.opera);
 
         var supportsCanvasDrawing 	= 	(browser.mozilla && browser.version.split(".")[0] >= 4 && !browser.seamonkey) ||
-                                        (browser.chrome && browser.version.split(".") >= 535) ||
+                                        (browser.chrome) ||
                                         (browser.msie && browser.version.split(".")[0] >= 9) ||
                                         (browser.safari && browser.version.split(".")[0] >= 535 /*&& !platform.ios*/);
 
@@ -857,16 +861,16 @@ window.FlowPaperViewerEmbedding = window.$f = function(id, args) {
 
                         // add fallback for html if not specified
                         if(conf.JSONFile!=null && conf.JSONFile.length>0 && conf.IMGFiles!=null && conf.IMGFiles.length>0){
-
-                            if((platform.ios /*&& (platform.iosversion<8 && platform.ipad)*/) || platform.android || (browser.msie && browser.version <=9) || platform.mobilepreview){ // ios should use html as preferred rendering mode if available.
+                            if((browser.safari /*&& (platform.iosversion<8 && platform.ipad)*/) || platform.android || (browser.msie && browser.version <=9) || platform.mobilepreview){ // ios should use html as preferred rendering mode if available.
                                 conf.RenderingOrder = "html" + (conf.RenderingOrder.length>0?",":"") + conf.RenderingOrder;
                             }else{
                                 conf.RenderingOrder += (conf.RenderingOrder.length>0?",":"")+"html";
                             }
                         }
 
-                        var oRenderingList 	= conf.RenderingOrder.split(",");
-                        var pageRenderer 	= null;
+                        var oRenderingList 	        = conf.RenderingOrder.split(",");
+                        var pageRenderer 	        = null;
+                        var usingFlattenedPDF       = conf.FontsToLoad && conf.FontsToLoad.length>0;
 
                         // if PDFJS isn't supported and the html formats are supplied, then use these as primary format
                         if(oRenderingList && oRenderingList.length==1 && conf.JSONFile!=null && conf.JSONFile.length>0 && conf.IMGFiles!=null && conf.IMGFiles.length>0 && !supportsCanvasDrawing){
@@ -874,7 +878,7 @@ window.FlowPaperViewerEmbedding = window.$f = function(id, args) {
                             oRenderingList[0] = 'html';
                         }
 
-                        if(conf.PdfFile!=null && conf.PdfFile.length>0 && conf.RenderingOrder.split(",").length>=1 && supportsCanvasDrawing && (oRenderingList[0] == 'html5' || (oRenderingList.length > 1 && oRenderingList[0] == 'flash' && oRenderingList[1] == 'html5'))){
+                        if(!usingFlattenedPDF && conf.PdfFile!=null && conf.PdfFile.length>0 && conf.RenderingOrder.split(",").length>=1 && supportsCanvasDrawing && (oRenderingList[0] == 'html5' || (oRenderingList.length > 1 && oRenderingList[0] == 'flash' && oRenderingList[1] == 'html5'))){
                             pageRenderer = new CanvasPageRenderer(viewerId,conf.PdfFile,conf.jsDirectory,
                                 {
                                     jsonfile                : conf.JSONFile,
@@ -906,7 +910,9 @@ window.FlowPaperViewerEmbedding = window.$f = function(id, args) {
                                     signature               : conf.signature,
                                     PageIndexAdjustment     : conf.PageIndexAdjustment,
                                     DisableShadows          : conf.DisableOverflow,
-                                    DisplayRange            : conf.DisplayRange
+                                    DisableOverflow         : conf.DisableOverflow,
+                                    DisplayRange            : conf.DisplayRange,
+                                    FontsToLoad             : conf.FontsToLoad
                                 },
                                 conf.jsDirectory);
                         }
@@ -937,6 +943,8 @@ window.FlowPaperViewerEmbedding = window.$f = function(id, args) {
                                 MixedMode               : conf.MixedMode,
                                 LoaderImage             : conf.LoaderImage,
                                 SharingUrl              : conf.SharingUrl,
+                                BrandingLogo            : conf.BrandingLogo,
+                                BrandingUrl             : conf.BrandingUrl,
                                 EnableWebGL             : conf.EnableWebGL,
                                 StartAtPage 			: conf.StartAtPage,
                                 RenderingOrder 			: conf.RenderingOrder,
@@ -946,6 +954,7 @@ window.FlowPaperViewerEmbedding = window.$f = function(id, args) {
                                 ZoomTime     			: conf.ZoomTime,
                                 ZoomTransition          : conf.ZoomTransition,
                                 ZoomInterval 			: conf.ZoomInterval,
+                                TouchZoomInterval       : conf.TouchZoomInterval,
                                 ViewModeToolsVisible 	: conf.ViewModeToolsVisible,
                                 ZoomToolsVisible 		: conf.ZoomToolsVisible,
                                 NavToolsVisible 		: conf.NavToolsVisible,
